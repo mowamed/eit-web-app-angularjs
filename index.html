@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eitApp">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Eit</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
+
+    <script src="https://code.angularjs.org/snapshot/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/eitService.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">EIT's</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <!-- EIT Entries Column -->
+        <div class="col-md-8">
+
+          <br>
+
+          <!-- EIT TABLE -->
+          <div class="card mb-4" ng-controller="eitController as ctrl">
+            <div class="card-body">
+              <h2 class="card-title">EIT</h2>
+              <table class="table table-hover" ng-controller="editEitCtrl as editCtrl">
+                  <tr ng-repeat="eit in ctrl.eitList">
+                    <td>{{eit.firstName}}</td>
+                    <td>{{eit.lastName}}</td>
+                    <td>{{eit.age}}</td>
+                    <td>{{eit.gender}}</td>
+                    <td>
+                      <button type="button" class="btn btn-primary" ng-click="editCtrl.getEit(eit.id)" data-toggle="modal" data-target="#myModal">
+                        Edit
+                      </button>
+                      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              </div>
+                              <div class="modal-body">
+                                  <form>
+                                      <div class="form-group">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" class="form-control" ng-model="editCtrl.eit.firstName" id="firstName" placeholder="First Name">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="lastName">Last Name</label>
+                                          <input type="text" class="form-control" ng-model="editCtrl.eit.lastName" id="lastName" placeholder="Last Name">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="dateBirth">age</label>
+                                          <input type="text" class="form-control" ng-model="editCtrl.eit.age" id="dateBirth" placeholder="Date of birth">
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="radio-inline">
+                                              <input type="radio" name="gender" ng-model="editCtrl.eit.gender" id="M" value="M"> Male
+                                            </label>
+                                            <label class="radio-inline">
+                                              <input type="radio" name="gender" ng-model="editCtrl.eit.gender" id="F" value="F"> Female
+                                            </label>
+                                            <label class="radio-inline">
+                                              <input type="radio" name="gender" ng-model="editCtrl.eit.gender" id="O" value="O"> Others
+                                            </label>
+                                      </div>
+                                    </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary">Update</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </td>
+                  </tr>
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+          <!-- form Widget -->
+          <div class="card my-4" ng-controller="addEitCtrl as addCtrl">
+            <h5 class="card-header">Add Eit</h5>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                      <label for="firstName">First Name</label>
+                      <input type="text" class="form-control" ng-model="addCtrl.fName" id="firstName" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" ng-model="addCtrl.lName" id="lastName" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateBirth">Date of birth</label>
+                        <input type="date" class="form-control" ng-model="addCtrl.age" id="dateBirth" placeholder="Date of birth">
+                    </div>
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="gender" ng-model="addCtrl.gender" id="M" value="M"> Male
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="gender" ng-model="addCtrl.gender" id="F" value="F"> Female
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="gender" ng-model="addCtrl.gender" id="O" value="O"> Others
+                          </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="addCtrl.addEit()">Add</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">MELTWATER ENTREPREUNARIAL SCHOOL OF TECHNOLOGY</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>
